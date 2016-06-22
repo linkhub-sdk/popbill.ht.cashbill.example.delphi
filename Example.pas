@@ -277,9 +277,7 @@ begin
                 StringGrid1.Cells[7, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
                 StringGrid1.Cells[8, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
         end;
-
         ShowMessage(tmp);
-
 end;
 
 procedure TTFormExample.btnSummaryClick(Sender: TObject);
