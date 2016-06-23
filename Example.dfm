@@ -51,6 +51,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '회원 가입'
         TabOrder = 0
+        OnClick = btnJoinMemberClick
       end
       object btnCheckIsMember: TButton
         Left = 8
@@ -59,6 +60,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '가입여부확인'
         TabOrder = 1
+        OnClick = btnCheckIsMemberClick
       end
       object btnCheckID: TButton
         Left = 8
@@ -67,6 +69,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = 'ID 중복 확인'
         TabOrder = 2
+        OnClick = btnCheckIDClick
       end
     end
     object GroupBox11: TGroupBox
@@ -83,6 +86,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '잔여포인트 확인'
         TabOrder = 0
+        OnClick = btnGetBalanceClick
       end
       object btnGetPartnerBalance: TButton
         Left = 8
@@ -91,6 +95,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '파트너포인트 확인'
         TabOrder = 1
+        OnClick = btnGetPartnerBalanceClick
       end
       object btnGetChargeInfo: TButton
         Left = 8
@@ -116,6 +121,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '담당자 정보 수정'
         TabOrder = 0
+        OnClick = btnUpdateContactClick
       end
       object btnRegistContact: TButton
         Left = 8
@@ -124,6 +130,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '담당자 추가'
         TabOrder = 1
+        OnClick = btnRegistContactClick
       end
       object btnListContact: TButton
         Left = 8
@@ -132,6 +139,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '담당자 목록 조회'
         TabOrder = 2
+        OnClick = btnListContactClick
       end
     end
     object GroupBox16: TGroupBox
@@ -148,6 +156,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '회사정보 조회'
         TabOrder = 0
+        OnClick = btnGetCorpInfoClick
       end
       object btnUpdateCorpInfo: TButton
         Left = 8
@@ -156,6 +165,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '회사정보 수정'
         TabOrder = 1
+        OnClick = btnUpdateCorpInfoClick
       end
     end
     object GroupBox2: TGroupBox
@@ -172,6 +182,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '팝빌 로그인 URL'
         TabOrder = 0
+        OnClick = btnGetPopbillURL_LOGINClick
       end
       object btnGetPopbillURL_CHRG: TButton
         Left = 8
@@ -180,6 +191,7 @@ object TFormExample: TTFormExample
         Height = 25
         Caption = '포인트충전 URL'
         TabOrder = 1
+        OnClick = btnGetPopbillURL_CHRGClick
       end
     end
   end

@@ -66,6 +66,18 @@ type
     procedure btnGetCertificatePopUpURLClick(Sender: TObject);
     procedure btnGetCertificateExpireDateClick(Sender: TObject);
     procedure btnGetChargeInfoClick(Sender: TObject);
+    procedure btnGetPopbillURL_LOGINClick(Sender: TObject);
+    procedure btnGetPopbillURL_CHRGClick(Sender: TObject);
+    procedure btnCheckIsMemberClick(Sender: TObject);
+    procedure btnCheckIDClick(Sender: TObject);
+    procedure btnJoinMemberClick(Sender: TObject);
+    procedure btnGetBalanceClick(Sender: TObject);
+    procedure btnGetPartnerBalanceClick(Sender: TObject);
+    procedure btnRegistContactClick(Sender: TObject);
+    procedure btnListContactClick(Sender: TObject);
+    procedure btnUpdateContactClick(Sender: TObject);
+    procedure btnGetCorpInfoClick(Sender: TObject);
+    procedure btnUpdateCorpInfoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -412,6 +424,280 @@ begin
         tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
 
         ShowMessage(tmp);
+end;
+
+procedure TTFormExample.btnGetPopbillURL_LOGINClick(Sender: TObject);
+var
+  resultURL : String;
+begin
+
+        try
+                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text,txtUserID.Text,'LOGIN');
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('팝빌 로그인 URL' + #13 + resultURL);
+end;
+
+procedure TTFormExample.btnGetPopbillURL_CHRGClick(Sender: TObject);
+var
+  resultURL : String;
+begin
+
+        try
+                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text,txtUserID.Text,'CHRG');
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('포인트충전 URL ' + #13 + resultURL);
+end;
+
+procedure TTFormExample.btnCheckIsMemberClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        try
+                response := htCashbillService.CheckIsMember(txtCorpNum.text,LinkID);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TTFormExample.btnCheckIDClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        try
+                response := htCashbillService.CheckID(txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TTFormExample.btnJoinMemberClick(Sender: TObject);
+var
+        response : TResponse;
+        joinInfo : TJoinForm;
+begin
+        joinInfo.LinkID := LinkID;        //링크아이디
+        joinInfo.CorpNum := '1231212312'; //사업자번호 '-' 제외.
+        joinInfo.CEOName := '대표자성명';
+        joinInfo.CorpName := '상호';
+        joinInfo.Addr := '주소';
+        joinInfo.BizType := '업태';
+        joinInfo.BizClass := '업종';
+        joinInfo.ID     := 'userid';  //6자 이상 20자 미만.
+        joinInfo.PWD    := 'pwd_must_be_long_enough'; //6자 이상 20자 미만.
+        joinInfo.ContactName := '담당자명';
+        joinInfo.ContactTEL :='02-999-9999';
+        joinInfo.ContactHP := '010-1234-5678';
+        joinInfo.ContactFAX := '02-999-9998';
+        joinInfo.ContactEmail := 'test@test.com';
+
+        try
+                response := htCashbillService.JoinMember(joinInfo);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+
+end;
+
+procedure TTFormExample.btnGetBalanceClick(Sender: TObject);
+var
+        balance : Double;
+begin
+        try
+                balance := htCashbillService.GetBalance(txtCorpNum.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('잔여포인트 : ' + FloatToStr(balance));
+
+end;
+
+procedure TTFormExample.btnGetPartnerBalanceClick(Sender: TObject);
+var
+        balance : Double;
+begin
+         try
+                balance := htCashbillService.GetPartnerBalance(txtCorpNum.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('잔여포인트 : ' + FloatToStr(balance));
+
+
+end;
+
+procedure TTFormExample.btnRegistContactClick(Sender: TObject);
+var
+        response : TResponse;
+        joinInfo : TJoinContact;
+begin
+        joinInfo.id := 'userid';                        // [필수] 아이디 (6자 이상 20자 미만)
+        joinInfo.pwd := 'thisispassword';               // [필수] 비밀번호 (6자 이상 20자 미만)
+        joinInfo.personName := '담당자성명';            // [필수] 담당자명(한글이나 영문 30자 이내)
+        joinInfo.tel := '070-7510-3710';                // [필수] 연락처
+        joinInfo.hp := '010-1111-2222';                 // 휴대폰번호
+        joinInfo.fax := '02-6442-9700';                 // 팩스번호
+        joinInfo.email := 'test@test.com';              // [필수] 이메일
+        joinInfo.searchAllAllowYN := false;             // 조회권한(true 회사조회/ false 개인조회)
+        joinInfo.mgrYN     := false;                    // 관리자 권한여부 
+
+        try
+                response := htCashbillService.RegistContact(txtCorpNum.text,joinInfo,txtUserID.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+end;
+
+procedure TTFormExample.btnListContactClick(Sender: TObject);
+var
+        InfoList : TContactInfoList;
+        tmp : string;
+        i : Integer;
+begin
+
+        try
+                InfoList := htCashbillService.ListContact(txtCorpNum.text,txtUserID.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+        tmp := 'id | email | hp | personName | searchAllAlloyYN | tel | fax | mgrYN | regDT' + #13;
+        for i := 0 to Length(InfoList) -1 do
+        begin
+            tmp := tmp + InfoList[i].id + ' | ';
+            tmp := tmp + InfoList[i].email + ' | ';
+            tmp := tmp + InfoList[i].hp + ' | ';
+            tmp := tmp + InfoList[i].personName + ' | ';
+            tmp := tmp + BoolToStr(InfoList[i].searchAllAllowYN) + ' | ';
+            tmp := tmp + InfoList[i].tel + ' | ';
+            tmp := tmp + InfoList[i].fax + ' | ';
+            tmp := tmp + BoolToStr(InfoList[i].mgrYN) + ' | ';
+            tmp := tmp + InfoList[i].regDT + #13;
+        end;
+
+        ShowMessage(tmp);
+end;
+
+procedure TTFormExample.btnUpdateContactClick(Sender: TObject);
+var
+        contactInfo : TContactInfo;
+        response : TResponse;
+begin
+        contactInfo := TContactInfo.Create;
+
+        contactInfo.personName := '테스트 담당자';      // 담당자명
+        contactInfo.tel := '070-7510-3710';             // 연락처
+        contactInfo.hp := '010-4324-1111';              // 휴대폰번호
+        contactInfo.email := 'test@test.com';           // 이메일 주소
+        contactInfo.fax := '02-6442-9799';              // 팩스번호
+        contactInfo.searchAllAllowYN := false;           // 조회권한, true(회사조회), false(개인조회)
+        contactInfo.mgrYN := false;                     // 관리자권한 설정여부 
+
+        try
+                response := htCashbillService.UpdateContact(txtCorpNum.text,contactInfo,txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TTFormExample.btnGetCorpInfoClick(Sender: TObject);
+var
+        corpInfo : TCorpInfo;
+        tmp : string;
+begin
+        try
+                corpInfo := htCashbillService.GetCorpInfo(txtCorpNum.text, txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        tmp := 'CorpName (상호) : ' + corpInfo.CorpName + #13;
+        tmp := tmp + 'CeoName (대표자성명) : ' + corpInfo.CeoName + #13;
+        tmp := tmp + 'BizType (업태) : ' + corpInfo.BizType + #13;
+        tmp := tmp + 'BizClass (종목) : ' + corpInfo.BizClass + #13;
+        tmp := tmp + 'Addr (주소) : ' + corpInfo.Addr + #13;
+
+        ShowMessage(tmp);
+
+end;
+
+procedure TTFormExample.btnUpdateCorpInfoClick(Sender: TObject);
+var
+        corpInfo : TCorpInfo;
+        response : TResponse;
+begin
+        corpInfo := TCorpInfo.Create;
+
+        corpInfo.ceoname := '대표자명';         // 대표자명
+        corpInfo.corpName := '팝빌1';    // 회사명
+        corpInfo.bizType := '업태';             // 업태
+        corpInfo.bizClass := '업종';            // 업종
+        corpInfo.addr := '서울특별시 강남구 영동대로 517';  // 주소
+        
+        try
+                response := htCashbillService.UpdateCorpInfo(txtCorpNum.text,corpInfo,txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
 end;
 
 end.
