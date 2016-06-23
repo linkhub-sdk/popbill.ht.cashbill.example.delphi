@@ -113,10 +113,10 @@ var
         EDate: String;
         jobID: String;
 begin
+        // 수집요청시 반환되는 작업아이디(jobID)의 유효시간은 1시간입니다.
 
         // 현금영수증 유형,  SELL- 매출, BUY- 매입
         mgtKeyType := EnumMgtKeyType(GetEnumValue(TypeInfo(EnumMgtKeyType),'SELL'));
-
 
         // 시작일자, 날자형식(yyyyMMdd)
         SDate := '20160501';
@@ -156,20 +156,18 @@ begin
                 end;
         end;
 
-        tmp := 'jobID : '+ jobInfo.jobID + #13;
-        tmp := tmp + 'jobState : '+ IntToStr(jobInfo.jobState) + #13;
-        tmp := tmp + 'queryType : ' + jobInfo.queryType  + #13;
-        tmp := tmp + 'queryDateType : ' + jobInfo.queryDateType  + #13;
-        tmp := tmp + 'queryStDate : ' + jobInfo.queryStDate + #13;
-        tmp := tmp + 'queryEnDate : ' + jobInfo.queryEnDate + #13;
-        tmp := tmp + 'errorCode : ' + IntToStr(jobInfo.errorCode) + #13;
-        tmp := tmp + 'errorReason : ' + jobInfo.errorReason + #13;
-        tmp := tmp + 'jobStartDT : ' + jobInfo.jobStartDT + #13;
-        tmp := tmp + 'jobEndDT : ' + jobInfo.jobEndDT + #13;
-        tmp := tmp + 'collectCount : ' + IntToStr(jobInfo.collectCount) + #13;
-        tmp := tmp + 'regDT : ' + jobInfo.regDT + #13;
-
-        tmp := tmp + #13;
+        tmp := 'jobID (작업아이디) : '+ jobInfo.jobID + #13;
+        tmp := tmp + 'jobState (수집상태) : '+ IntToStr(jobInfo.jobState) + #13;
+        tmp := tmp + 'queryType (수집유형) : ' + jobInfo.queryType  + #13;
+        tmp := tmp + 'queryDateType (수집일자 유형) : ' + jobInfo.queryDateType  + #13;
+        tmp := tmp + 'queryStDate (시작일자) : ' + jobInfo.queryStDate + #13;
+        tmp := tmp + 'queryEnDate (종료일자) : ' + jobInfo.queryEnDate + #13;
+        tmp := tmp + 'errorCode (오류코드) : ' + IntToStr(jobInfo.errorCode) + #13;
+        tmp := tmp + 'errorReason (오류메시지) : ' + jobInfo.errorReason + #13;
+        tmp := tmp + 'jobStartDT (작업 시작일시) : ' + jobInfo.jobStartDT + #13;
+        tmp := tmp + 'jobEndDT (작업 종료일시) : ' + jobInfo.jobEndDT + #13;
+        tmp := tmp + 'collectCount (수집개수) : ' + IntToStr(jobInfo.collectCount) + #13;
+        tmp := tmp + 'regDT (수집 요청일시) : ' + jobInfo.regDT + #13;
 
         ShowMessage(tmp);
 end;
@@ -277,6 +275,7 @@ begin
                 StringGrid1.Cells[7, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
                 StringGrid1.Cells[8, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
         end;
+
         ShowMessage(tmp);
 end;
 

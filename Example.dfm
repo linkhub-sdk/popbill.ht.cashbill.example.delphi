@@ -1,6 +1,6 @@
 object TFormExample: TTFormExample
-  Left = 391
-  Top = 165
+  Left = 403
+  Top = 117
   Width = 799
   Height = 802
   Caption = '팝빌 홈택스 현금영수증 연계 API SDK Example'
