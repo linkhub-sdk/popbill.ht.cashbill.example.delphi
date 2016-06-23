@@ -120,7 +120,7 @@ begin
 end;
 procedure TTFormExample.btnRequestJobClick(Sender: TObject);
 var
-        mgtKeyType: EnumMgtKeyType;
+        queryType: EnumQueryType;
         SDate: String;
         EDate: String;
         jobID: String;
@@ -128,7 +128,7 @@ begin
         // 수집요청시 반환되는 작업아이디(jobID)의 유효시간은 1시간입니다.
 
         // 현금영수증 유형,  SELL- 매출, BUY- 매입
-        mgtKeyType := EnumMgtKeyType(GetEnumValue(TypeInfo(EnumMgtKeyType),'SELL'));
+        queryType := SELL;
 
         // 시작일자, 날자형식(yyyyMMdd)
         SDate := '20160501';
@@ -137,7 +137,7 @@ begin
         EDate := '20160731';
         
         try
-                jobID := htCashbillService.RequestJob(txtCorpNum.text, mgtKeyType, SDate, EDate);
+                jobID := htCashbillService.RequestJob(txtCorpNum.text, queryType, SDate, EDate);
 
         except
                 on le : EPopbillException do begin
