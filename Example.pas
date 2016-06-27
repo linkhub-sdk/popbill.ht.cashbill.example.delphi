@@ -130,10 +130,10 @@ begin
         // 현금영수증 유형,  SELL- 매출, BUY- 매입
         queryType := SELL;
 
-        // 시작일자, 날자형식(yyyyMMdd)
+        // 시작일자, 표시형식(yyyyMMdd)
         SDate := '20160501';
 
-        // 종료일자, 날자형식(yyyyMMdd)
+        // 종료일자, 표시형식(yyyyMMdd)
         EDate := '20160731';
         
         try
