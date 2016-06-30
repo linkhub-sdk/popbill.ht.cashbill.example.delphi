@@ -411,7 +411,7 @@ var
 begin
 
         try
-                chargeInfo := htCashbillService.GetChargeInfo(txtCorpNum.text);
+                chargeInfo := htCashbillService.GetChargeInfo(txtCorpNum.text, txtUserID.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
