@@ -81,7 +81,7 @@ object TFormExample: TTFormExample
       TabOrder = 1
       object btnGetBalance: TButton
         Left = 8
-        Top = 24
+        Top = 56
         Width = 129
         Height = 25
         Caption = '잔여포인트 확인'
@@ -90,7 +90,7 @@ object TFormExample: TTFormExample
       end
       object btnGetPartnerBalance: TButton
         Left = 8
-        Top = 56
+        Top = 88
         Width = 129
         Height = 25
         Caption = '파트너포인트 확인'
@@ -99,7 +99,7 @@ object TFormExample: TTFormExample
       end
       object btnGetChargeInfo: TButton
         Left = 8
-        Top = 88
+        Top = 24
         Width = 129
         Height = 25
         Caption = '과금정보 확인'
