@@ -3,8 +3,8 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/1059                  }
-{ - 업데이트 일자 : 2016-10-06                                                 }
-{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991 (정요한 대리)             }
+{ - 업데이트 일자 : 2017-02-23                                                 }
+{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
@@ -161,10 +161,10 @@ begin
         queryType := SELL;
 
         // 시작일자, 표시형식(yyyyMMdd)
-        SDate := '20160901';
+        SDate := '20170101';
 
         // 종료일자, 표시형식(yyyyMMdd)
-        EDate := '20161031';
+        EDate := '20170301';
         
         try
                 jobID := htCashbillService.RequestJob(txtCorpNum.text, queryType, SDate, EDate);
@@ -387,7 +387,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.GetFlatRatePopUpURL(txtCorpNum.Text,txtUserID.Text);
+                resultURL := htCashbillService.GetFlatRatePopUpURL(txtCorpNum.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -438,7 +438,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.GetCertificatePopUpURL(txtCorpNum.Text,txtUserID.Text);
+                resultURL := htCashbillService.GetCertificatePopUpURL(txtCorpNum.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -479,7 +479,7 @@ begin
         {**********************************************************************}
         
         try
-                chargeInfo := htCashbillService.GetChargeInfo(txtCorpNum.text, txtUserID.text);
+                chargeInfo := htCashbillService.GetChargeInfo(txtCorpNum.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -504,7 +504,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text,txtUserID.Text,'LOGIN');
+                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text, 'LOGIN');
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -525,7 +525,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text,txtUserID.Text,'CHRG');
+                resultURL := htCashbillService.getPopbillURL(txtCorpNum.Text, 'CHRG');
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -729,7 +729,7 @@ begin
         joinInfo.mgrYN := false; 
 
         try
-                response := htCashbillService.RegistContact(txtCorpNum.text,joinInfo,txtUserID.text);
+                response := htCashbillService.RegistContact(txtCorpNum.text, joinInfo);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -751,7 +751,7 @@ begin
         {**********************************************************************}
         
         try
-                InfoList := htCashbillService.ListContact(txtCorpNum.text,txtUserID.text);
+                InfoList := htCashbillService.ListContact(txtCorpNum.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -808,7 +808,7 @@ begin
         contactInfo.mgrYN := false; 
 
         try
-                response := htCashbillService.UpdateContact(txtCorpNum.text,contactInfo,txtUserID.Text);
+                response := htCashbillService.UpdateContact(txtCorpNum.text, contactInfo, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -830,7 +830,7 @@ begin
         {**********************************************************************}
         
         try
-                corpInfo := htCashbillService.GetCorpInfo(txtCorpNum.text, txtUserID.Text);
+                corpInfo := htCashbillService.GetCorpInfo(txtCorpNum.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -875,7 +875,7 @@ begin
         corpInfo.addr := '서울특별시 강남구 영동대로 517';
         
         try
-                response := htCashbillService.UpdateCorpInfo(txtCorpNum.text,corpInfo,txtUserID.Text);
+                response := htCashbillService.UpdateCorpInfo(txtCorpNum.text, corpInfo);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
