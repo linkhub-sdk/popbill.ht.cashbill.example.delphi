@@ -2,8 +2,8 @@
 {                                                                              }
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
-{ - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/1059                  }
-{ - 업데이트 일자 : 2017-02-23                                                 }
+{ - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
+{ - 업데이트 일자 : 2017-03-08                                                 }
 { - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
