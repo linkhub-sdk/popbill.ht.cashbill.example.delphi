@@ -3,8 +3,8 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-05-23                                                 }
-{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
+{ - 업데이트 일자 : 2017-08-30                                                 }
+{ - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
@@ -50,8 +50,6 @@ type
     btnCheckIsMember: TButton;
     btnCheckID: TButton;
     GroupBox11: TGroupBox;
-    btnGetBalance: TButton;
-    btnGetPartnerBalance: TButton;
     btnGetChargeInfo: TButton;
     GroupBox4: TGroupBox;
     btnUpdateContact: TButton;
@@ -62,7 +60,6 @@ type
     btnUpdateCorpInfo: TButton;
     GroupBox2: TGroupBox;
     btnGetPopbillURL_LOGIN: TButton;
-    btnGetPopbillURL_CHRG: TButton;
     txtCorpNum: TEdit;
     txtUserID: TEdit;
     GroupBox1: TGroupBox;
@@ -82,6 +79,12 @@ type
     btnGetCertificateExpireDate: TButton;
     StringGrid1: TStringGrid;
     Label2: TLabel;
+    GroupBox7: TGroupBox;
+    btnGetBalance: TButton;
+    GroupBox10: TGroupBox;
+    btnGetPartnerBalance: TButton;
+    btnGetPopbillURL_CHRG: TButton;
+    btnGetPartnerURL_CHRG: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnRequestJobClick(Sender: TObject);
     procedure btnGetJobStateClick(Sender: TObject);
@@ -105,6 +108,7 @@ type
     procedure btnUpdateContactClick(Sender: TObject);
     procedure btnGetCorpInfoClick(Sender: TObject);
     procedure btnUpdateCorpInfoClick(Sender: TObject);
+    procedure btnGetPartnerURL_CHRGClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -887,6 +891,28 @@ begin
         end;
 
         ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TTFormExample.btnGetPartnerURL_CHRGClick(Sender: TObject);
+var
+        resultURL : String;
+begin
+        {**********************************************************************}
+        {    파트너 포인트 충전 URL을 반환합니다.                              }
+        {    URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.      }
+        {**********************************************************************}
+
+        try
+                resultURL := htCashbillService.getPartnerURL(txtCorpNum.Text, 'CHRG');
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('파트너 포인트충전 URL ' + #13 + resultURL);
 
 end;
 
