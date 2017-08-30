@@ -133,14 +133,15 @@ begin
         htCashbillService.IsThrowException := true;
 
         StringGrid1.Cells[0,0] := '구분';
-        StringGrid1.Cells[1,0] := '거래일시';
-        StringGrid1.Cells[2,0] := '식별번호';
-        StringGrid1.Cells[3,0] := '공급가액';
-        StringGrid1.Cells[4,0] := '세액';
-        StringGrid1.Cells[5,0] := '봉사료';
-        StringGrid1.Cells[6,0] := '거래금액';
-        StringGrid1.Cells[7,0] := '문서형태';
-        StringGrid1.Cells[8,0] := '국세청승인번호';
+        StringGrid1.Cells[1,0] := '매출/매입';
+        StringGrid1.Cells[2,0] := '거래일시';
+        StringGrid1.Cells[3,0] := '식별번호';
+        StringGrid1.Cells[4,0] := '공급가액';
+        StringGrid1.Cells[5,0] := '세액';
+        StringGrid1.Cells[6,0] := '봉사료';
+        StringGrid1.Cells[7,0] := '거래금액';
+        StringGrid1.Cells[8,0] := '문서형태';
+        StringGrid1.Cells[9,0] := '국세청승인번호';
 
 
 end;
@@ -325,14 +326,15 @@ begin
         begin
 
                 StringGrid1.Cells[0, i+1] := searchInfo.list[i].tradeUsage;  // 거래유형
-                StringGrid1.Cells[1, i+1] := searchInfo.list[i].tradeDT;     // 거래일시
-                StringGrid1.Cells[2, i+1] := searchInfo.list[i].identityNum; // 거래처 식별번호
-                StringGrid1.Cells[3, i+1] := searchInfo.list[i].supplyCost;  // 공급가액
-                StringGrid1.Cells[4, i+1] := searchInfo.list[i].tax;         // 세액
-                StringGrid1.Cells[5, i+1] := searchInfo.list[i].serviceFee;  // 봉사료
-                StringGrid1.Cells[6, i+1] := searchInfo.list[i].totalAmount; // 거래금액
-                StringGrid1.Cells[7, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
-                StringGrid1.Cells[8, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
+                StringGrid1.Cells[1, i+1] := searchInfo.list[i].invoiceType;  // 매출/매입
+                StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;     // 거래일시
+                StringGrid1.Cells[3, i+1] := searchInfo.list[i].identityNum; // 거래처 식별번호
+                StringGrid1.Cells[4, i+1] := searchInfo.list[i].supplyCost;  // 공급가액
+                StringGrid1.Cells[5, i+1] := searchInfo.list[i].tax;         // 세액
+                StringGrid1.Cells[6, i+1] := searchInfo.list[i].serviceFee;  // 봉사료
+                StringGrid1.Cells[7, i+1] := searchInfo.list[i].totalAmount; // 거래금액
+                StringGrid1.Cells[8, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
+                StringGrid1.Cells[9, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
         end;
 
         ShowMessage(tmp);

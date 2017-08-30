@@ -241,7 +241,7 @@ object TFormExample: TTFormExample
   object GroupBox1: TGroupBox
     Left = 8
     Top = 208
-    Width = 769
+    Width = 865
     Height = 545
     Caption = '홈택스 현금영수증 연계 관련 API'
     TabOrder = 3
@@ -377,22 +377,23 @@ object TFormExample: TTFormExample
     object StringGrid1: TStringGrid
       Left = 16
       Top = 216
-      Width = 737
+      Width = 841
       Height = 281
-      ColCount = 9
+      ColCount = 10
       FixedCols = 0
       RowCount = 11
       TabOrder = 4
       ColWidths = (
         64
-        107
-        82
+        77
+        122
         79
         84
         76
         83
         61
-        85)
+        85
+        97)
     end
   end
 end
