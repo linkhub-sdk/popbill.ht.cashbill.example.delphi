@@ -360,7 +360,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 161
         Height = 25
-        Caption = '공인인증서 등록 URL'
+        Caption = '홈택스 인증관리 URL'
         TabOrder = 2
         OnClick = btnGetCertificatePopUpURLClick
       end
