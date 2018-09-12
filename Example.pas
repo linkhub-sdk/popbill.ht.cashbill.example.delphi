@@ -775,7 +775,8 @@ begin
             tmp := tmp + InfoList[i].tel + ' | ';
             tmp := tmp + InfoList[i].fax + ' | ';
             tmp := tmp + BoolToStr(InfoList[i].mgrYN) + ' | ';
-            tmp := tmp + InfoList[i].regDT + #13;
+            tmp := tmp + InfoList[i].regDT + ' | ';
+            tmp := tmp + IntToStr(InfoList[i].state) + #13;
         end;
 
         ShowMessage(tmp);
