@@ -241,13 +241,13 @@ object TFormExample: TTFormExample
   object GroupBox1: TGroupBox
     Left = 8
     Top = 208
-    Width = 865
+    Width = 1089
     Height = 545
     Caption = '홈택스 현금영수증 연계 관련 API'
     TabOrder = 3
     object Label1: TLabel
       Left = 24
-      Top = 176
+      Top = 208
       Width = 106
       Height = 13
       AutoSize = False
@@ -255,7 +255,7 @@ object TFormExample: TTFormExample
     end
     object Label2: TLabel
       Left = 24
-      Top = 198
+      Top = 230
       Width = 263
       Height = 13
       AutoSize = False
@@ -265,7 +265,7 @@ object TFormExample: TTFormExample
       Left = 16
       Top = 24
       Width = 149
-      Height = 128
+      Height = 161
       Caption = '매출/매입 내역 수집'
       TabOrder = 0
       object btnRequestJob: TButton
@@ -298,7 +298,7 @@ object TFormExample: TTFormExample
     end
     object txtJobID: TEdit
       Left = 136
-      Top = 173
+      Top = 205
       Width = 153
       Height = 21
       ImeName = 'Microsoft IME 2010'
@@ -308,7 +308,7 @@ object TFormExample: TTFormExample
       Left = 176
       Top = 24
       Width = 179
-      Height = 129
+      Height = 161
       Caption = '매출/매입 수집결과 조회'
       TabOrder = 2
       object btnSearch: TButton
@@ -355,29 +355,11 @@ object TFormExample: TTFormExample
         TabOrder = 1
         OnClick = btnGetFlatRateStateClick
       end
-      object btnGetCertificatePopUpURL: TButton
-        Left = 8
-        Top = 88
-        Width = 161
-        Height = 25
-        Caption = '홈택스 인증관리 URL'
-        TabOrder = 2
-        OnClick = btnGetCertificatePopUpURLClick
-      end
-      object btnGetCertificateExpireDate: TButton
-        Left = 8
-        Top = 120
-        Width = 161
-        Height = 25
-        Caption = '공인인증서 만료일자 확인'
-        TabOrder = 3
-        OnClick = btnGetCertificateExpireDateClick
-      end
     end
     object StringGrid1: TStringGrid
       Left = 16
-      Top = 216
-      Width = 841
+      Top = 248
+      Width = 1057
       Height = 281
       ColCount = 10
       FixedCols = 0
@@ -394,6 +376,77 @@ object TFormExample: TTFormExample
         61
         85
         97)
+    end
+    object GroupBox12: TGroupBox
+      Left = 552
+      Top = 24
+      Width = 377
+      Height = 161
+      Caption = '홈택스 인증관련 기능'
+      TabOrder = 5
+      object btnGetCertificatePopUpURL: TButton
+        Left = 8
+        Top = 24
+        Width = 177
+        Height = 25
+        Caption = '홈택스 인증관리 URL'
+        TabOrder = 0
+        OnClick = btnGetCertificatePopUpURLClick
+      end
+      object btnGetCertificateExpireDate: TButton
+        Left = 8
+        Top = 56
+        Width = 177
+        Height = 25
+        Caption = '공인인증서 만료일자 확인'
+        TabOrder = 1
+        OnClick = btnGetCertificateExpireDateClick
+      end
+      object btnCheckCertValidation: TButton
+        Left = 8
+        Top = 88
+        Width = 177
+        Height = 25
+        Caption = '공인인증서 로그인 테스트'
+        TabOrder = 2
+        OnClick = btnCheckCertValidationClick
+      end
+      object btnRegistDeptUser: TButton
+        Left = 8
+        Top = 120
+        Width = 177
+        Height = 25
+        Caption = '부서사용자 계정등록'
+        TabOrder = 3
+        OnClick = btnRegistDeptUserClick
+      end
+      object btnCheckDeptUser: TButton
+        Left = 192
+        Top = 24
+        Width = 177
+        Height = 25
+        Caption = '부서사용자 등록정보 확인'
+        TabOrder = 4
+        OnClick = btnCheckDeptUserClick
+      end
+      object btnCheckLoginDeptUser: TButton
+        Left = 192
+        Top = 56
+        Width = 177
+        Height = 25
+        Caption = '부서사용자 로그인 테스트'
+        TabOrder = 5
+        OnClick = btnCheckLoginDeptUserClick
+      end
+      object btnDeleteDeptUser: TButton
+        Left = 192
+        Top = 88
+        Width = 177
+        Height = 25
+        Caption = '부서사용자 등록정보 삭제'
+        TabOrder = 6
+        OnClick = btnDeleteDeptUserClick
+      end
     end
   end
 end

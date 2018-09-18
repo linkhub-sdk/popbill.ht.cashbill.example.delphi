@@ -3,7 +3,7 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-08-30                                                 }
+{ - 업데이트 일자 : 2018-09-18                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -75,8 +75,6 @@ type
     GroupBox6: TGroupBox;
     btnGetFlatRatePopUpURL: TButton;
     btnGetFlatRateState: TButton;
-    btnGetCertificatePopUpURL: TButton;
-    btnGetCertificateExpireDate: TButton;
     StringGrid1: TStringGrid;
     Label2: TLabel;
     GroupBox7: TGroupBox;
@@ -85,6 +83,14 @@ type
     btnGetPartnerBalance: TButton;
     btnGetPopbillURL_CHRG: TButton;
     btnGetPartnerURL_CHRG: TButton;
+    GroupBox12: TGroupBox;
+    btnGetCertificatePopUpURL: TButton;
+    btnGetCertificateExpireDate: TButton;
+    btnCheckCertValidation: TButton;
+    btnRegistDeptUser: TButton;
+    btnCheckDeptUser: TButton;
+    btnCheckLoginDeptUser: TButton;
+    btnDeleteDeptUser: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnRequestJobClick(Sender: TObject);
     procedure btnGetJobStateClick(Sender: TObject);
@@ -109,6 +115,11 @@ type
     procedure btnGetCorpInfoClick(Sender: TObject);
     procedure btnUpdateCorpInfoClick(Sender: TObject);
     procedure btnGetPartnerURL_CHRGClick(Sender: TObject);
+    procedure btnCheckCertValidationClick(Sender: TObject);
+    procedure btnRegistDeptUserClick(Sender: TObject);
+    procedure btnCheckDeptUserClick(Sender: TObject);
+    procedure btnCheckLoginDeptUserClick(Sender: TObject);
+    procedure btnDeleteDeptUserClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -917,6 +928,114 @@ begin
 
         ShowMessage('파트너 포인트충전 URL ' + #13 + resultURL);
 
+end;
+
+procedure TTFormExample.btnCheckCertValidationClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        {**********************************************************************}
+        { 팝빌에 등록된 공인인증서의 홈택스 로그인을 테스트한다.               }
+        {**********************************************************************}
+
+        try
+                response := htCashbillService.CheckCertValidation(txtCorpNum.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+end;
+
+procedure TTFormExample.btnRegistDeptUserClick(Sender: TObject);
+var
+        response : TResponse;
+        deptUserID, deptUserPWD : String;
+begin
+        {**********************************************************************}
+        { 홈택스 현금영수증 부서사용자 계정을 등록한다.                        }
+        {**********************************************************************}
+
+        //홈택스에서 생성한 현금영수증 부서사용자 아이디
+        deptUserID := 'linkhub0002';
+
+        // 홈택스에서 생성한 현금영수증 부서사용자 비밀번호
+        deptUserPWD := 'linkhub8536!';
+
+        try
+                response := htCashbillService.RegistDeptUser(txtCorpNum.Text, deptUserID, deptUserPWD);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+end;
+
+procedure TTFormExample.btnCheckDeptUserClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        {**********************************************************************}
+        { 팝빌에 등록된 현금영수증 부서사용자 아이디를 확인한다.               }
+        {**********************************************************************}
+
+        try
+                response := htCashbillService.CheckDeptUser(txtCorpNum.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+end;
+
+procedure TTFormExample.btnCheckLoginDeptUserClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        {**********************************************************************}
+        { 팝빌에 등록된 현금영수증부서사용자 계정정보를 이용하여               }
+        { 홈택스 로그인을 테스트한다.                                          }
+        {**********************************************************************}
+
+        try
+                response := htCashbillService.CheckLoginDeptUser(txtCorpNum.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+end;
+
+procedure TTFormExample.btnDeleteDeptUserClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        {**********************************************************************}
+        { 팝빌에 등록된 현금영수증 부서사용자 계정정보를 삭제한다.             }
+        {**********************************************************************}
+
+        try
+                response := htCashbillService.DeleteDeptUser(txtCorpNum.Text);
+        except
+                on le : EPopbillException do begin          
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
 end.
