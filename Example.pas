@@ -3,7 +3,7 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2018-09-18                                                 }
+{ - 업데이트 일자 : 2018-09-26                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -153,8 +153,7 @@ begin
         StringGrid1.Cells[7,0] := '거래금액';
         StringGrid1.Cells[8,0] := '문서형태';
         StringGrid1.Cells[9,0] := '국세청승인번호';
-
-
+        StringGrid1.Cells[10,0] := '거래일자';
 end;
 Function BoolToStr(b:Boolean):String;
 begin
@@ -346,6 +345,7 @@ begin
                 StringGrid1.Cells[7, i+1] := searchInfo.list[i].totalAmount; // 거래금액
                 StringGrid1.Cells[8, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
                 StringGrid1.Cells[9, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
+                StringGrid1.Cells[10, i+1] := searchInfo.list[i].tradeDate; // 국세청승인번호
         end;
 
         ShowMessage(tmp);
