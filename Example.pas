@@ -960,10 +960,10 @@ begin
         {**********************************************************************}
 
         //홈택스에서 생성한 현금영수증 부서사용자 아이디
-        deptUserID := 'linkhub0002';
+        deptUserID := 'test_id';
 
         // 홈택스에서 생성한 현금영수증 부서사용자 비밀번호
-        deptUserPWD := 'linkhub8536!';
+        deptUserPWD := 'test_pwd!';
 
         try
                 response := htCashbillService.RegistDeptUser(txtCorpNum.Text, deptUserID, deptUserPWD);
