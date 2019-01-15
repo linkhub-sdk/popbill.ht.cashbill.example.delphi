@@ -1,9 +1,9 @@
 object TFormExample: TTFormExample
-  Left = 700
-  Top = 116
+  Left = 522
+  Top = 117
   Width = 1121
   Height = 802
-  Caption = '팝빌 홈택스 현금영수증 연계 API SDK Example'
+  Caption = '팝빌 홈택스 현금영수증 연동 API SDK Example'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
