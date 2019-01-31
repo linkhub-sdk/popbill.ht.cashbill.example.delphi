@@ -3,7 +3,7 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-01-15                                                 }
+{ - 업데이트 일자 : 2019-01-31                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -182,7 +182,7 @@ begin
 
         // 종료일자, 표시형식(yyyyMMdd)
         EDate := '20190115';
-        
+
         try
                 jobID := htCashbillService.RequestJob(txtCorpNum.text, queryType, SDate, EDate);
 
@@ -195,7 +195,6 @@ begin
 
         ShowMessage('jobID : ' + jobID);
         txtjobID.text := jobID;
-
 end;
 
 procedure TTFormExample.btnGetJobStateClick(Sender: TObject);
@@ -300,21 +299,21 @@ begin
         {  - 응답항목에 관한 정보는 "[홈택스연동(현금영수증) API 연동매뉴얼]   }
         {    > 3.2.1. Search 수집 결과 조회" 을 참조하시기 바랍니다.           }
         {**********************************************************************}
-        
-        // 현금영수증 종류, N - 일반 현금영수증, C - 취소 현금영수증
+
+        // 현금영수증 종류, N-일반 현금영수증, C-취소 현금영수증
         SetLength(tradeType, 2);
         tradeType[0] := 'N';
         tradeType[1] := 'C';
 
-        // 거래용도 배열, P - 소득공제용, C - 지출증빙용
+        // 거래용도 배열, P-소득공제용, C-지출증빙용
         SetLength(tradeUsage, 2);
         tradeUsage[0] := 'P';
         tradeUsage[1] := 'C';
 
-        // 페이지번호 
+        // 페이지번호, 기본값 '1'
         Page := 1;
 
-        // 페이지당 검색개수
+        // 페이지당 검색개수, 기본값 500, 최대 1000
         PerPage := 10;
 
         // 정렬방향, D-내림차순, A-오름차순
@@ -337,23 +336,21 @@ begin
         tmp := tmp + 'pageCount (페이지 개수) : ' + IntToStr(searchInfo.pageCount)+ #13;
         tmp := tmp + 'message (응답 메시지) : ' + searchInfo.message + #13 + #13;
 
-
         for i:=0 to length(searchInfo.list)-1 do
         begin
 
-                StringGrid1.Cells[0, i+1] := searchInfo.list[i].tradeUsage;  // 거래유형
-                StringGrid1.Cells[1, i+1] := searchInfo.list[i].invoiceType;  // 매출/매입
-                StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;     // 거래일시
-                StringGrid1.Cells[3, i+1] := searchInfo.list[i].identityNum; // 거래처 식별번호
-                StringGrid1.Cells[4, i+1] := searchInfo.list[i].supplyCost;  // 공급가액
-                StringGrid1.Cells[5, i+1] := searchInfo.list[i].tax;         // 세액
-                StringGrid1.Cells[6, i+1] := searchInfo.list[i].serviceFee;  // 봉사료
-                StringGrid1.Cells[7, i+1] := searchInfo.list[i].totalAmount; // 거래금액
-                StringGrid1.Cells[8, i+1] := searchInfo.list[i].tradeType;   // 현금영수증 형태
+                StringGrid1.Cells[0, i+1] := searchInfo.list[i].tradeUsage;    // 거래유형
+                StringGrid1.Cells[1, i+1] := searchInfo.list[i].invoiceType;   // 매출/매입
+                StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;       // 거래일시
+                StringGrid1.Cells[3, i+1] := searchInfo.list[i].identityNum;   // 거래처 식별번호
+                StringGrid1.Cells[4, i+1] := searchInfo.list[i].supplyCost;    // 공급가액
+                StringGrid1.Cells[5, i+1] := searchInfo.list[i].tax;           // 세액
+                StringGrid1.Cells[6, i+1] := searchInfo.list[i].serviceFee;    // 봉사료
+                StringGrid1.Cells[7, i+1] := searchInfo.list[i].totalAmount;   // 거래금액
+                StringGrid1.Cells[8, i+1] := searchInfo.list[i].tradeType;     // 현금영수증 형태
                 StringGrid1.Cells[9, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
-                StringGrid1.Cells[10, i+1] := searchInfo.list[i].tradeDate; // 국세청승인번호
+                StringGrid1.Cells[10, i+1] := searchInfo.list[i].tradeDate;    // 국세청승인번호
         end;
-
         ShowMessage(tmp);
 end;
 
@@ -369,15 +366,15 @@ begin
         { 현금영수증  매출/매입 내역의 수집 결과 요약정보를 조회합니다.        }
         {  - 수집 요청시 반환되는 작업아이디(jobID)의 유효시간은 1시간입니다.  }
         {  - 응답항목에 관한 정보는 "[홈택스연동(현금영수증) API 연동매뉴얼]   }
-        {     > 3.2.2. Sumary 수집 결과 요약정보 조회" 을 참조하시기 바랍니다. }
+        {     > 3.2.2. Summary 수집 결과 요약정보 조회" 을 참조하시기 바랍니다. }
         {**********************************************************************}
-        
-        // 현금영수증 종류, N - 일반 현금영수증, C - 취소 현금영수증
+
+        // 현금영수증 종류, N-일반 현금영수증, C-취소 현금영수증
         SetLength(tradeType, 2);
         tradeType[0] := 'N';
         tradeType[1] := 'C';
 
-        // 거래용도 배열, P - 소득공제용, C - 지출증빙용
+        // 거래용도 배열, P-소득공제용, C-지출증빙용
         SetLength(tradeUsage, 2);
         tradeUsage[0] := 'P';
         tradeUsage[1] := 'C';
@@ -397,9 +394,7 @@ begin
         tmp := tmp + 'serviceFeeTotal (봉사료 합계) : ' + IntToStr(summaryInfo.serviceFeeTotal) + #13;
         tmp := tmp + 'taxTotal (세액 합계) : ' + IntToStr(summaryInfo.taxTotal) + #13;
         tmp := tmp + 'amountTotal (합계 금액) : ' + IntToStr(summaryInfo.amountTotal) + #13;
-
         ShowMessage(tmp);
-
 end;
 
 procedure TTFormExample.btnGetFlatRatePopUpURLClick(Sender: TObject);
@@ -419,7 +414,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + resultURL);
 end;
 
@@ -471,7 +465,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -491,7 +484,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ExpireDate is : ' + expires);
 end;
 
@@ -500,9 +492,9 @@ var
         chargeInfo : THometaxCBChargeInfo;
         tmp : String;
 begin
-        {**********************************************************************}
-        { 홈택스 전자세금계산서 연계  API 서비스 과금정보를 확인합니다.        }
-        {**********************************************************************}
+        {******************************************************************}
+        { 홈택스 현금영수증 연동  API 서비스 과금정보를 확인합니다.        }
+        {******************************************************************}
         
         try
                 chargeInfo := htCashbillService.GetChargeInfo(txtCorpNum.text);
@@ -516,7 +508,6 @@ begin
         tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
         tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
         tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
-
         ShowMessage(tmp);
 end;
 
@@ -537,7 +528,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('팝빌 로그인 URL' + #13 + resultURL);
 end;
 
@@ -558,7 +548,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('포인트충전 URL ' + #13 + resultURL);
 end;
 
@@ -567,8 +556,8 @@ var
         response : TResponse;
 begin
         {**********************************************************************}
-        { 해당 사업자의 파트너 연동회원 가입여부를 확인합니다.                 }
-        { - LinkID는 인증정보에 설정되어 있는 링크아이디 입니다.               }
+        { 파트너의 연동회원으로 가입된 사업자번호인지 확인합니다.              }
+        { - LinkID는 파트너를 식별하는 인증정보(38번라인)에 설정되어 있습니다. }
         {**********************************************************************}
         
         try
@@ -579,9 +568,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TTFormExample.btnCheckIDClick(Sender: TObject);
@@ -600,9 +587,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TTFormExample.btnJoinMemberClick(Sender: TObject);
@@ -619,7 +604,7 @@ begin
         joinInfo.LinkID := LinkID;
 
         // 사업자번호 '-' 제외, 10자리
-        joinInfo.CorpNum := '4364364364';
+        joinInfo.CorpNum := '1234567890';
 
         // 대표자성명, 최대 100자
         joinInfo.CEOName := '대표자성명';
@@ -665,9 +650,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TTFormExample.btnGetBalanceClick(Sender: TObject);
@@ -688,9 +671,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('잔여포인트 : ' + FloatToStr(balance));
-
 end;
 
 procedure TTFormExample.btnGetPartnerBalanceClick(Sender: TObject);
@@ -711,10 +692,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('잔여포인트 : ' + FloatToStr(balance));
-
-
 end;
 
 procedure TTFormExample.btnRegistContactClick(Sender: TObject);
@@ -727,7 +705,7 @@ begin
         {**********************************************************************}
 
         // [필수] 담당자 아이디 (6자 이상 50자 미만)
-        joinInfo.id := 'testkorea0222_01';
+        joinInfo.id := 'testkorea';
 
         // [필수] 비밀번호 (6자 이상 20자 미만)
         joinInfo.pwd := 'thisispassword';
@@ -761,7 +739,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -774,7 +751,7 @@ begin
         {**********************************************************************}
         { 연동회원의 담당자 목록을 확인합니다.                                 }
         {**********************************************************************}
-        
+
         try
                 InfoList := htCashbillService.ListContact(txtCorpNum.text);
         except
@@ -800,7 +777,6 @@ begin
             tmp := tmp + InfoList[i].regDT + ' | ';
             tmp := tmp + IntToStr(InfoList[i].state) + #13;
         end;
-
         ShowMessage(tmp);
 end;
 
@@ -875,9 +851,7 @@ begin
         tmp := tmp + 'BizType (업태) : ' + corpInfo.BizType + #13;
         tmp := tmp + 'BizClass (종목) : ' + corpInfo.BizClass + #13;
         tmp := tmp + 'Addr (주소) : ' + corpInfo.Addr + #13;
-
         ShowMessage(tmp);
-
 end;
 
 procedure TTFormExample.btnUpdateCorpInfoClick(Sender: TObject);
@@ -905,7 +879,7 @@ begin
 
         // 주소, 최대 300자
         corpInfo.addr := '서울특별시 강남구 영동대로 517';
-        
+
         try
                 response := htCashbillService.UpdateCorpInfo(txtCorpNum.text, corpInfo);
         except
@@ -914,9 +888,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TTFormExample.btnGetPartnerURL_CHRGClick(Sender: TObject);
@@ -936,9 +908,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('파트너 포인트충전 URL ' + #13 + resultURL);
-
 end;
 
 procedure TTFormExample.btnCheckCertValidationClick(Sender: TObject);
@@ -957,7 +927,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -984,7 +953,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -1004,7 +972,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -1025,7 +992,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -1045,7 +1011,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 

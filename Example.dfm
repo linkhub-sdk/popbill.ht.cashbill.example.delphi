@@ -67,7 +67,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 121
         Height = 25
-        Caption = 'ID 중복 확인'
+        Caption = '아이디 중복 확인'
         TabOrder = 2
         OnClick = btnCheckIDClick
       end
