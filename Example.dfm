@@ -1,6 +1,6 @@
 object TFormExample: TTFormExample
-  Left = 522
-  Top = 117
+  Left = 347
+  Top = 146
   Width = 1121
   Height = 802
   Caption = '팝빌 홈택스 현금영수증 연동 API SDK Example'
@@ -361,12 +361,12 @@ object TFormExample: TTFormExample
       Top = 248
       Width = 1057
       Height = 281
-      ColCount = 11
+      ColCount = 18
       FixedCols = 0
       RowCount = 11
       TabOrder = 4
       ColWidths = (
-        64
+        91
         77
         122
         79
@@ -376,6 +376,13 @@ object TFormExample: TTFormExample
         61
         85
         97
+        104
+        64
+        64
+        64
+        64
+        64
+        64
         64)
     end
     object GroupBox12: TGroupBox

@@ -139,22 +139,30 @@ begin
 
         //연동환경 설정값, true(개발용), false(상업용)
         htCashbillService.IsTest := true;
-        
-        //Exception 처리 설정값. 미기재시 true(기본값) 
+
+        //Exception 처리 설정값. 미기재시 true(기본값)
         htCashbillService.IsThrowException := true;
 
-        StringGrid1.Cells[0,0] := '구분';
-        StringGrid1.Cells[1,0] := '매출/매입';
-        StringGrid1.Cells[2,0] := '거래일시';
-        StringGrid1.Cells[3,0] := '식별번호';
-        StringGrid1.Cells[4,0] := '공급가액';
-        StringGrid1.Cells[5,0] := '세액';
-        StringGrid1.Cells[6,0] := '봉사료';
-        StringGrid1.Cells[7,0] := '거래금액';
-        StringGrid1.Cells[8,0] := '문서형태';
-        StringGrid1.Cells[9,0] := '국세청승인번호';
-        StringGrid1.Cells[10,0] := '거래일자';
+        StringGrid1.Cells[0,0] := 'ntsconfirmNum';
+        StringGrid1.Cells[1,0] := 'tradeDate';
+        StringGrid1.Cells[2,0] := 'tradeDT';
+        StringGrid1.Cells[3,0] := 'tradeType';
+        StringGrid1.Cells[4,0] := 'tradeUsage';
+        StringGrid1.Cells[5,0] := 'totalAmount';
+        StringGrid1.Cells[6,0] := 'supplyCost';
+        StringGrid1.Cells[7,0] := 'tax';
+        StringGrid1.Cells[8,0] := 'serviceFee';
+        StringGrid1.Cells[9,0] := 'invoiceType';
+        StringGrid1.Cells[10,0] := 'franchiseCorpNum';
+        StringGrid1.Cells[11,0] := 'franchiseCorpName';
+        StringGrid1.Cells[12,0] := 'franchiseCorpName';
+        StringGrid1.Cells[13,0] := 'identityNum';
+        StringGrid1.Cells[14,0] := 'identityNumType';
+        StringGrid1.Cells[15,0] := 'customerName';
+        StringGrid1.Cells[16,0] := 'cardOwnerName';
+        StringGrid1.Cells[17,0] := 'deductionType';
 end;
+
 Function BoolToStr(b:Boolean):String;
 begin
     if b = true then BoolToStr:='True';
@@ -338,18 +346,24 @@ begin
 
         for i:=0 to length(searchInfo.list)-1 do
         begin
-
-                StringGrid1.Cells[0, i+1] := searchInfo.list[i].tradeUsage;    // 거래유형
-                StringGrid1.Cells[1, i+1] := searchInfo.list[i].invoiceType;   // 매출/매입
-                StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;       // 거래일시
-                StringGrid1.Cells[3, i+1] := searchInfo.list[i].identityNum;   // 거래처 식별번호
-                StringGrid1.Cells[4, i+1] := searchInfo.list[i].supplyCost;    // 공급가액
-                StringGrid1.Cells[5, i+1] := searchInfo.list[i].tax;           // 세액
-                StringGrid1.Cells[6, i+1] := searchInfo.list[i].serviceFee;    // 봉사료
-                StringGrid1.Cells[7, i+1] := searchInfo.list[i].totalAmount;   // 거래금액
-                StringGrid1.Cells[8, i+1] := searchInfo.list[i].tradeType;     // 현금영수증 형태
-                StringGrid1.Cells[9, i+1] := searchInfo.list[i].ntsconfirmNum; // 국세청승인번호
-                StringGrid1.Cells[10, i+1] := searchInfo.list[i].tradeDate;    // 국세청승인번호
+        StringGrid1.Cells[0, i+1] := searchInfo.list[i].ntsconfirmNum;             // 국세청 승인번호
+        StringGrid1.Cells[1, i+1] := searchInfo.list[i].tradeDate;                 // 거래일자
+        StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;                   // 거래일시
+        StringGrid1.Cells[3, i+1] := searchInfo.list[i].tradeType;                 // 문서형태
+        StringGrid1.Cells[4, i+1] := searchInfo.list[i].tradeUsage;                // 거래구분
+        StringGrid1.Cells[5, i+1] := searchInfo.list[i].totalAmount;               // 거래금액
+        StringGrid1.Cells[6, i+1] := searchInfo.list[i].supplyCost;                // 공급가액
+        StringGrid1.Cells[7, i+1] := searchInfo.list[i].tax;                       // 부가세
+        StringGrid1.Cells[8, i+1] := searchInfo.list[i].serviceFee;                // 봉사료
+        StringGrid1.Cells[9, i+1] := searchInfo.list[i].invoiceType;               // 매입/매출
+        StringGrid1.Cells[10, i+1] := searchInfo.list[i].franchiseCorpNum;         // 발행자 사업자번호
+        StringGrid1.Cells[11, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 상호
+        StringGrid1.Cells[12, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 사업자유형
+        StringGrid1.Cells[13, i+1] := searchInfo.list[i].identityNum;              // 식별번호
+        StringGrid1.Cells[14, i+1] := IntToStr(searchInfo.list[i].identityNumType);// 식별번호유형
+        StringGrid1.Cells[15, i+1] := searchInfo.list[i].customerName;             // 고객명
+        StringGrid1.Cells[16, i+1] := searchInfo.list[i].cardOwnerName;            // 카드소유자명
+        StringGrid1.Cells[17, i+1] := IntToStr(searchInfo.list[i].deductionType);  // 공제유형
         end;
         ShowMessage(tmp);
 end;
