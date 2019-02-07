@@ -3,19 +3,22 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-01-31                                                 }
+{ - 업데이트 일자 : 2019-02-07                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
-{ (1) 38, 41번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를          }
+{ (1) 41, 44번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를          }
 {    링크허브 가입시 메일로 발급받은 인증정보로 수정                           }
 { (2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입                 }
-{ (3) 홈택스 인증처리를 합니다. (부서사용자등록 / 공인인증서 등록              }
-{    - [팝빌로그인] > [홈택스연동] > [환경설정] > [인증 관리] 메뉴             }
-{    - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL API) 반환된 URL을  }
-{      을 이용하여 홈택스 인증 처리를 합니다.                                  }
-{                                                                              }
+{ (3) 홈택스 연동서비스를 이용하기 위해 팝빌에 인증정보를 등록합니다           }
+{     인증방법은 부서사용자 인증 공인인증서 인증 방식이 있습니다.              }
+{     - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴에서          }
+{       [홈택스 부서사용자 등록] 혹은 [홈택스 공인인증서 등록]을 통해          }
+{       인증정보를 등록합니다.                                                 }
+{     - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL)반환된 URL에      }
+{       접속하여 [홈택스 부서사용자 등록] 혹은 [홈택스 공인인증서 등록]을      }
+{       통해 인증정보를 등록합니다.                                            }
 {******************************************************************************}
 
 unit Example;
@@ -373,7 +376,7 @@ var
 
         tradeType : array of string;
         tradeUsage : array of string;
-        summaryInfo : TCashbillSummary;
+        summaryInfo : TCashbillSummar`y;
         tmp : string;
 begin
         {**********************************************************************}
@@ -428,7 +431,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + resultURL);
+        ShowMessage('URL : ' + resultURL);
 end;
 
 procedure TTFormExample.btnGetFlatRateStateClick(Sender: TObject);
@@ -479,7 +482,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TTFormExample.btnGetCertificateExpireDateClick(Sender: TObject);
@@ -542,7 +545,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('팝빌 로그인 URL' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TTFormExample.btnGetChargeURLClick(Sender: TObject);
@@ -562,7 +565,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('포인트충전 URL ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TTFormExample.btnCheckIsMemberClick(Sender: TObject);
@@ -922,7 +925,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('파트너 포인트충전 URL ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TTFormExample.btnCheckCertValidationClick(Sender: TObject);
