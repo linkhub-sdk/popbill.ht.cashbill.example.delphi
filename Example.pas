@@ -376,7 +376,7 @@ var
 
         tradeType : array of string;
         tradeUsage : array of string;
-        summaryInfo : TCashbillSummar`y;
+        summaryInfo : TCashbillSummary;
         tmp : string;
 begin
         {**********************************************************************}
