@@ -3,7 +3,7 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example                          }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-02-07                                                 }
+{ - 업데이트 일자 : 2019-03-25                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -144,7 +144,7 @@ begin
         htCashbillService.IsTest := true;
 
         //Exception 처리 설정값. 미기재시 true(기본값)
-        htCashbillService.IsThrowException := true;
+        htCashbillService.IsThrowException := false;
 
         StringGrid1.Cells[0,0] := 'ntsconfirmNum';
         StringGrid1.Cells[1,0] := 'tradeDate';
@@ -204,8 +204,16 @@ begin
                 end;
         end;
 
-        ShowMessage('jobID : ' + jobID);
-        txtjobID.text := jobID;
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('jobID : ' + jobID);
+                txtjobID.text := jobID;
+        end;
+
 end;
 
 procedure TTFormExample.btnGetJobStateClick(Sender: TObject);
@@ -229,20 +237,27 @@ begin
                 end;
         end;
 
-        tmp := 'jobID (작업아이디) : '+ jobInfo.jobID + #13;
-        tmp := tmp + 'jobState (수집상태) : '+ IntToStr(jobInfo.jobState) + #13;
-        tmp := tmp + 'queryType (수집유형) : ' + jobInfo.queryType  + #13;
-        tmp := tmp + 'queryDateType (수집일자 유형) : ' + jobInfo.queryDateType  + #13;
-        tmp := tmp + 'queryStDate (시작일자) : ' + jobInfo.queryStDate + #13;
-        tmp := tmp + 'queryEnDate (종료일자) : ' + jobInfo.queryEnDate + #13;
-        tmp := tmp + 'errorCode (오류코드) : ' + IntToStr(jobInfo.errorCode) + #13;
-        tmp := tmp + 'errorReason (오류메시지) : ' + jobInfo.errorReason + #13;
-        tmp := tmp + 'jobStartDT (작업 시작일시) : ' + jobInfo.jobStartDT + #13;
-        tmp := tmp + 'jobEndDT (작업 종료일시) : ' + jobInfo.jobEndDT + #13;
-        tmp := tmp + 'collectCount (수집개수) : ' + IntToStr(jobInfo.collectCount) + #13;
-        tmp := tmp + 'regDT (수집 요청일시) : ' + jobInfo.regDT + #13;
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'jobID (작업아이디) : '+ jobInfo.jobID + #13;
+                tmp := tmp + 'jobState (수집상태) : '+ IntToStr(jobInfo.jobState) + #13;
+                tmp := tmp + 'queryType (수집유형) : ' + jobInfo.queryType  + #13;
+                tmp := tmp + 'queryDateType (수집일자 유형) : ' + jobInfo.queryDateType  + #13;
+                tmp := tmp + 'queryStDate (시작일자) : ' + jobInfo.queryStDate + #13;
+                tmp := tmp + 'queryEnDate (종료일자) : ' + jobInfo.queryEnDate + #13;
+                tmp := tmp + 'errorCode (오류코드) : ' + IntToStr(jobInfo.errorCode) + #13;
+                tmp := tmp + 'errorReason (오류메시지) : ' + jobInfo.errorReason + #13;
+                tmp := tmp + 'jobStartDT (작업 시작일시) : ' + jobInfo.jobStartDT + #13;
+                tmp := tmp + 'jobEndDT (작업 종료일시) : ' + jobInfo.jobEndDT + #13;
+                tmp := tmp + 'collectCount (수집개수) : ' + IntToStr(jobInfo.collectCount) + #13;
+                tmp := tmp + 'regDT (수집 요청일시) : ' + jobInfo.regDT + #13;
 
-        ShowMessage(tmp);
+                ShowMessage(tmp);
+        end;
 end;
 
 procedure TTFormExample.btnListActiveJobClick(Sender: TObject);
@@ -259,7 +274,6 @@ begin
 
         try
                 jobList := htCashbillService.ListActiveState(txtCorpNum.text);
-
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -267,29 +281,35 @@ begin
                 end;
         end;
 
-        tmp := 'jobID(작업아이디) | jobState(수집상태) | queryType(수집유형) | queryDateType(일자유형) | ';
-        tmp := tmp + 'queryStDate(시작일자) |queryEnDate(종료일자) | errorCode(오류코드) | errorReason(오류메시지) | ';
-        tmp := tmp + 'jobStartDT(작업 시작일시) | jobEndDT(작업 종료일시) | collectCount(수집개수) | regDT(수집 요청일시) ' + #13;
-
-        for i := 0 to Length(jobList) -1 do
+        if htCashbillService.LastErrCode <> 0 then
         begin
-            tmp := tmp + jobList[i].jobID + ' | ';
-            tmp := tmp + IntToStr(jobList[i].jobState) + ' | ';
-            tmp := tmp + jobList[i].queryType + ' | ';
-            tmp := tmp + jobList[i].queryDateType + ' | ';
-            tmp := tmp + jobList[i].queryStDate + ' | ';
-            tmp := tmp + jobList[i].queryEnDate + ' | ';
-            tmp := tmp + IntToStr(jobList[i].errorCode) + ' | ';
-            tmp := tmp + jobList[i].errorReason + ' | ';
-            tmp := tmp + jobList[i].jobStartDT + ' | ';
-            tmp := tmp + jobList[i].jobEndDT + ' | ';
-            tmp := tmp + IntToStr(jobList[i].collectCount) + ' | ';
-            tmp := tmp + jobList[i].regDT + #13;
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'jobID(작업아이디) | jobState(수집상태) | queryType(수집유형) | queryDateType(일자유형) | ';
+                tmp := tmp + 'queryStDate(시작일자) |queryEnDate(종료일자) | errorCode(오류코드) | errorReason(오류메시지) | ';
+                tmp := tmp + 'jobStartDT(작업 시작일시) | jobEndDT(작업 종료일시) | collectCount(수집개수) | regDT(수집 요청일시) ' + #13;
+
+                for i := 0 to Length(jobList) -1 do
+                begin
+                    tmp := tmp + jobList[i].jobID + ' | ';
+                    tmp := tmp + IntToStr(jobList[i].jobState) + ' | ';
+                    tmp := tmp + jobList[i].queryType + ' | ';
+                    tmp := tmp + jobList[i].queryDateType + ' | ';
+                    tmp := tmp + jobList[i].queryStDate + ' | ';
+                    tmp := tmp + jobList[i].queryEnDate + ' | ';
+                    tmp := tmp + IntToStr(jobList[i].errorCode) + ' | ';
+                    tmp := tmp + jobList[i].errorReason + ' | ';
+                    tmp := tmp + jobList[i].jobStartDT + ' | ';
+                    tmp := tmp + jobList[i].jobEndDT + ' | ';
+                    tmp := tmp + IntToStr(jobList[i].collectCount) + ' | ';
+                    tmp := tmp + jobList[i].regDT + #13;
+                end;
+
+                txtJobId.text := jobList[0].jobID;
+                ShowMessage(tmp);                
         end;
-
-        txtJobId.text := jobList[0].jobID;
-        ShowMessage(tmp);
-
 end;
 
 procedure TTFormExample.btnSearchClick(Sender: TObject);
@@ -336,39 +356,49 @@ begin
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
-                        Exit;
+                        Exit;                                                                     
                 end;
         end;
 
-        tmp := 'code (응답코드) : ' + IntToStr(searchInfo.code) + #13;
-        tmp := tmp + 'total (총 검색결과 건수) : ' + IntToStr(searchInfo.total) + #13;
-        tmp := tmp + 'perPage (페이지당 검색개수) : ' + IntToStr(searchInfo.perPage) + #13;
-        tmp := tmp + 'pageNum (페이지 번호) : ' + IntToStr(searchInfo.pageNum) + #13;
-        tmp := tmp + 'pageCount (페이지 개수) : ' + IntToStr(searchInfo.pageCount)+ #13;
-        tmp := tmp + 'message (응답 메시지) : ' + searchInfo.message + #13 + #13;
 
-        for i:=0 to length(searchInfo.list)-1 do
+        if htCashbillService.LastErrCode <> 0 then
         begin
-        StringGrid1.Cells[0, i+1] := searchInfo.list[i].ntsconfirmNum;             // 국세청 승인번호
-        StringGrid1.Cells[1, i+1] := searchInfo.list[i].tradeDate;                 // 거래일자
-        StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;                   // 거래일시
-        StringGrid1.Cells[3, i+1] := searchInfo.list[i].tradeType;                 // 문서형태
-        StringGrid1.Cells[4, i+1] := searchInfo.list[i].tradeUsage;                // 거래구분
-        StringGrid1.Cells[5, i+1] := searchInfo.list[i].totalAmount;               // 거래금액
-        StringGrid1.Cells[6, i+1] := searchInfo.list[i].supplyCost;                // 공급가액
-        StringGrid1.Cells[7, i+1] := searchInfo.list[i].tax;                       // 부가세
-        StringGrid1.Cells[8, i+1] := searchInfo.list[i].serviceFee;                // 봉사료
-        StringGrid1.Cells[9, i+1] := searchInfo.list[i].invoiceType;               // 매입/매출
-        StringGrid1.Cells[10, i+1] := searchInfo.list[i].franchiseCorpNum;         // 발행자 사업자번호
-        StringGrid1.Cells[11, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 상호
-        StringGrid1.Cells[12, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 사업자유형
-        StringGrid1.Cells[13, i+1] := searchInfo.list[i].identityNum;              // 식별번호
-        StringGrid1.Cells[14, i+1] := IntToStr(searchInfo.list[i].identityNumType);// 식별번호유형
-        StringGrid1.Cells[15, i+1] := searchInfo.list[i].customerName;             // 고객명
-        StringGrid1.Cells[16, i+1] := searchInfo.list[i].cardOwnerName;            // 카드소유자명
-        StringGrid1.Cells[17, i+1] := IntToStr(searchInfo.list[i].deductionType);  // 공제유형
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'code (응답코드) : ' + IntToStr(searchInfo.code) + #13;
+                tmp := tmp + 'total (총 검색결과 건수) : ' + IntToStr(searchInfo.total) + #13;
+                tmp := tmp + 'perPage (페이지당 검색개수) : ' + IntToStr(searchInfo.perPage) + #13;
+                tmp := tmp + 'pageNum (페이지 번호) : ' + IntToStr(searchInfo.pageNum) + #13;
+                tmp := tmp + 'pageCount (페이지 개수) : ' + IntToStr(searchInfo.pageCount)+ #13;
+                tmp := tmp + 'message (응답 메시지) : ' + searchInfo.message + #13 + #13;
+
+                for i:=0 to length(searchInfo.list)-1 do
+                begin
+                        StringGrid1.Cells[0, i+1] := searchInfo.list[i].ntsconfirmNum;             // 국세청 승인번호
+                        StringGrid1.Cells[1, i+1] := searchInfo.list[i].tradeDate;                 // 거래일자
+                        StringGrid1.Cells[2, i+1] := searchInfo.list[i].tradeDT;                   // 거래일시
+                        StringGrid1.Cells[3, i+1] := searchInfo.list[i].tradeType;                 // 문서형태
+                        StringGrid1.Cells[4, i+1] := searchInfo.list[i].tradeUsage;                // 거래구분
+                        StringGrid1.Cells[5, i+1] := searchInfo.list[i].totalAmount;               // 거래금액
+                        StringGrid1.Cells[6, i+1] := searchInfo.list[i].supplyCost;                // 공급가액
+                        StringGrid1.Cells[7, i+1] := searchInfo.list[i].tax;                       // 부가세
+                        StringGrid1.Cells[8, i+1] := searchInfo.list[i].serviceFee;                // 봉사료
+                        StringGrid1.Cells[9, i+1] := searchInfo.list[i].invoiceType;               // 매입/매출
+                        StringGrid1.Cells[10, i+1] := searchInfo.list[i].franchiseCorpNum;         // 발행자 사업자번호
+                        StringGrid1.Cells[11, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 상호
+                        StringGrid1.Cells[12, i+1] := searchInfo.list[i].franchiseCorpName;        // 발행자 사업자유형
+                        StringGrid1.Cells[13, i+1] := searchInfo.list[i].identityNum;              // 식별번호
+                        StringGrid1.Cells[14, i+1] := IntToStr(searchInfo.list[i].identityNumType);// 식별번호유형
+                        StringGrid1.Cells[15, i+1] := searchInfo.list[i].customerName;             // 고객명
+                        StringGrid1.Cells[16, i+1] := searchInfo.list[i].cardOwnerName;            // 카드소유자명
+                        StringGrid1.Cells[17, i+1] := IntToStr(searchInfo.list[i].deductionType);  // 공제유형
+                end;
+                ShowMessage(tmp);
         end;
-        ShowMessage(tmp);
+
+
 end;
 
 procedure TTFormExample.btnSummaryClick(Sender: TObject);
@@ -406,12 +436,20 @@ begin
                 end;
         end;
 
-        tmp := 'count (수집 결과 건수) : ' + IntToStr(summaryInfo.count) + #13;
-        tmp := tmp + 'supplyCostTotal (공급가액 합계) : ' + IntToStr(summaryInfo.supplyCostTotal) + #13;
-        tmp := tmp + 'serviceFeeTotal (봉사료 합계) : ' + IntToStr(summaryInfo.serviceFeeTotal) + #13;
-        tmp := tmp + 'taxTotal (세액 합계) : ' + IntToStr(summaryInfo.taxTotal) + #13;
-        tmp := tmp + 'amountTotal (합계 금액) : ' + IntToStr(summaryInfo.amountTotal) + #13;
-        ShowMessage(tmp);
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'count (수집 결과 건수) : ' + IntToStr(summaryInfo.count) + #13;
+                tmp := tmp + 'supplyCostTotal (공급가액 합계) : ' + IntToStr(summaryInfo.supplyCostTotal) + #13;
+                tmp := tmp + 'serviceFeeTotal (봉사료 합계) : ' + IntToStr(summaryInfo.serviceFeeTotal) + #13;
+                tmp := tmp + 'taxTotal (세액 합계) : ' + IntToStr(summaryInfo.taxTotal) + #13;
+                tmp := tmp + 'amountTotal (합계 금액) : ' + IntToStr(summaryInfo.amountTotal) + #13;
+                ShowMessage(tmp);
+        end;
+
 end;
 
 procedure TTFormExample.btnGetFlatRatePopUpURLClick(Sender: TObject);
@@ -431,7 +469,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + resultURL);
+
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + resultURL);
+        end;
 end;
 
 procedure TTFormExample.btnGetFlatRateStateClick(Sender: TObject);
@@ -452,16 +498,25 @@ begin
                 end;
         end;
 
-        tmp := 'referenceID (사업자번호) : ' + stateInfo.referenceID + #13;
-        tmp := tmp + 'contractDT (정액제 서비스 시작일시) : ' + stateInfo.contractDT + #13;
-        tmp := tmp + 'useEndDate (정액제 서비스 종료일시) : ' + stateInfo.useEndDate + #13;
-        tmp := tmp + 'baseDate (자동연장 결제일) : ' + IntToStr(stateInfo.baseDate) + #13;
-        tmp := tmp + 'state (정액제 서비스 상태) : ' + IntToStr(stateInfo.state) + #13;
-        tmp := tmp + 'closeRequestYN (정액제 해지신청 여부) : ' + BoolToStr(stateInfo.closeRequestYN) + #13;
-        tmp := tmp + 'useRestrictYN (정액제 사용제한 여부) : ' + BoolToStr(stateInfo.useRestrictYN) + #13;
-        tmp := tmp + 'closeOnExpired (정액제 만료시 해지 여부) : ' + BoolToStr(stateInfo.closeOnExpired) + #13;
-        tmp := tmp + 'unPaidYN (미수금 보유 여부) : ' + BoolToStr(stateInfo.unPaidYN) + #13;
-        ShowMessage(tmp);
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'referenceID (사업자번호) : ' + stateInfo.referenceID + #13;
+                tmp := tmp + 'contractDT (정액제 서비스 시작일시) : ' + stateInfo.contractDT + #13;
+                tmp := tmp + 'useEndDate (정액제 서비스 종료일시) : ' + stateInfo.useEndDate + #13;
+                tmp := tmp + 'baseDate (자동연장 결제일) : ' + IntToStr(stateInfo.baseDate) + #13;
+                tmp := tmp + 'state (정액제 서비스 상태) : ' + IntToStr(stateInfo.state) + #13;
+                tmp := tmp + 'closeRequestYN (정액제 해지신청 여부) : ' + BoolToStr(stateInfo.closeRequestYN) + #13;
+                tmp := tmp + 'useRestrictYN (정액제 사용제한 여부) : ' + BoolToStr(stateInfo.useRestrictYN) + #13;
+                tmp := tmp + 'closeOnExpired (정액제 만료시 해지 여부) : ' + BoolToStr(stateInfo.closeOnExpired) + #13;
+                tmp := tmp + 'unPaidYN (미수금 보유 여부) : ' + BoolToStr(stateInfo.unPaidYN) + #13;
+                ShowMessage(tmp);
+        end;
+
+
 end;
 
 procedure TTFormExample.btnGetCertificatePopUpURLClick(Sender: TObject);
@@ -482,7 +537,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TTFormExample.btnGetCertificateExpireDateClick(Sender: TObject);
@@ -501,7 +564,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ExpireDate is : ' + expires);
+
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('ExpireDate is : ' + expires);
+        end;
 end;
 
 procedure TTFormExample.btnGetChargeInfoClick(Sender: TObject);
@@ -522,10 +593,17 @@ begin
                 end;
         end;
 
-        tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
-        tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
-        tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
-        ShowMessage(tmp);
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
+                tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
+                tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
+                ShowMessage(tmp);
+        end;
 end;
 
 procedure TTFormExample.btnGetAccessURLClick(Sender: TObject);
@@ -944,7 +1022,16 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+
+        if htCashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(htCashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  htCashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
+
 end;
 
 procedure TTFormExample.btnRegistDeptUserClick(Sender: TObject);
