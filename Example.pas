@@ -144,7 +144,7 @@ begin
         htCashbillService.IsTest := true;
 
         //Exception 처리 설정값. 미기재시 true(기본값)
-        htCashbillService.IsThrowException := false;
+        htCashbillService.IsThrowException := true;
 
         StringGrid1.Cells[0,0] := 'ntsconfirmNum';
         StringGrid1.Cells[1,0] := 'tradeDate';
