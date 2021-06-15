@@ -1,6 +1,6 @@
 object TFormExample: TTFormExample
-  Left = 347
-  Top = 146
+  Left = 669
+  Top = 246
   Width = 1121
   Height = 802
   Caption = '팝빌 홈택스 현금영수증 연동 API SDK Example'
@@ -34,7 +34,7 @@ object TFormExample: TTFormExample
     Left = 8
     Top = 40
     Width = 1089
-    Height = 161
+    Height = 185
     Caption = '팝빌 기본 API'
     TabOrder = 0
     object GroupBox9: TGroupBox
@@ -93,12 +93,12 @@ object TFormExample: TTFormExample
       Left = 624
       Top = 24
       Width = 145
-      Height = 121
+      Height = 153
       Caption = '담당자 관련'
       TabOrder = 2
       object btnUpdateContact: TButton
         Left = 8
-        Top = 88
+        Top = 120
         Width = 129
         Height = 25
         Caption = '담당자 정보 수정'
@@ -116,12 +116,21 @@ object TFormExample: TTFormExample
       end
       object btnListContact: TButton
         Left = 8
-        Top = 56
+        Top = 88
         Width = 129
         Height = 25
         Caption = '담당자 목록 조회'
         TabOrder = 2
         OnClick = btnListContactClick
+      end
+      object btnGetContactInfo: TButton
+        Left = 8
+        Top = 56
+        Width = 129
+        Height = 25
+        Caption = '담당자 정보 확인'
+        TabOrder = 3
+        OnClick = btnGetContactInfoClick
       end
     end
     object GroupBox16: TGroupBox
@@ -171,7 +180,7 @@ object TFormExample: TTFormExample
       Left = 312
       Top = 24
       Width = 148
-      Height = 121
+      Height = 153
       Caption = '연동과금 포인트'
       TabOrder = 5
       object btnGetBalance: TButton
@@ -191,6 +200,24 @@ object TFormExample: TTFormExample
         Caption = '포인트충전 URL'
         TabOrder = 1
         OnClick = btnGetChargeURLClick
+      end
+      object btnGetPaymentURL: TButton
+        Left = 8
+        Top = 88
+        Width = 129
+        Height = 25
+        Caption = '포인트 결제내역 URL'
+        TabOrder = 2
+        OnClick = btnGetPaymentURLClick
+      end
+      object btnGetUseHistoryURL: TButton
+        Left = 8
+        Top = 120
+        Width = 129
+        Height = 25
+        Caption = '포인트 사용내역 URL'
+        TabOrder = 3
+        OnClick = btnGetUseHistoryURLClick
       end
     end
     object GroupBox10: TGroupBox
@@ -240,9 +267,9 @@ object TFormExample: TTFormExample
   end
   object GroupBox1: TGroupBox
     Left = 8
-    Top = 208
+    Top = 224
     Width = 1089
-    Height = 545
+    Height = 529
     Caption = '홈택스 현금영수증 연계 관련 API'
     TabOrder = 3
     object Label1: TLabel
