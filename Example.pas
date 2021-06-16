@@ -155,6 +155,9 @@ begin
         //인증토큰 IP제한기능 사용여부, true(권장)
         htCashbillService.IPRestrictOnOff := true;
 
+        //로컬시스템 시간 사용여부, true(사용), false(미사용) - 기본값
+        htCashbillService.UseLocalTimeYN := false;
+
         StringGrid1.Cells[0,0] := 'ntsconfirmNum';
         StringGrid1.Cells[1,0] := 'tradeDate';
         StringGrid1.Cells[2,0] := 'tradeDT';
