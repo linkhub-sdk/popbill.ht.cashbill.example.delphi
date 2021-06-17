@@ -200,10 +200,10 @@ begin
         queryType := SELL;
 
         // 시작일자, 표시형식(yyyyMMdd)
-        SDate := '20180601';
+        SDate := '20210601';
 
         // 종료일자, 표시형식(yyyyMMdd)
-        EDate := '20190115';
+        EDate := '20210615';
 
         try
                 jobID := htCashbillService.RequestJob(txtCorpNum.text, queryType, SDate, EDate);
