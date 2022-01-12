@@ -145,16 +145,16 @@ procedure TTFormExample.FormCreate(Sender: TObject);
 begin
         htCashbillService := THometaxCBService.Create(LinkID,SecretKey);
 
-        //연동환경 설정값, true(개발용), false(상업용)
+        // 연동환경 설정, true-개발용, false-상업용
         htCashbillService.IsTest := true;
 
-        //Exception 처리 설정값. 미기재시 true(기본값)
+        // Exception 처리 설정, true-사용, false-미사용, 기본값(true)
         htCashbillService.IsThrowException := true;
 
-        //인증토큰 IP제한기능 사용여부, true(권장)
+        // 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
         htCashbillService.IPRestrictOnOff := true;
 
-        //로컬시스템 시간 사용여부, true(사용), false(미사용) - 기본값
+        //로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
         htCashbillService.UseLocalTimeYN := false;
 
         StringGrid1.Cells[0,0] := 'ntsconfirmNum';
