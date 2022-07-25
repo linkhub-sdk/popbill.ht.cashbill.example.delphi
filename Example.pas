@@ -96,6 +96,8 @@ type
     btnGetPaymentURL: TButton;
     btnGetUseHistoryURL: TButton;
     btnGetContactInfo: TButton;
+    txtURL: TEdit;
+    Label5: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnRequestJobClick(Sender: TObject);
     procedure btnGetJobStateClick(Sender: TObject);
@@ -475,6 +477,7 @@ begin
         
         try
                 resultURL := htCashbillService.GetFlatRatePopUpURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL; 
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -544,6 +547,7 @@ begin
         
         try
                 resultURL := htCashbillService.GetCertificatePopUpURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -633,6 +637,7 @@ begin
         
         try
                 resultURL := htCashbillService.getAccessURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -661,6 +666,7 @@ begin
 
         try
                 resultURL := htCashbillService.getChargeURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1080,6 +1086,7 @@ begin
 
         try
                 resultURL := htCashbillService.getPartnerURL(txtCorpNum.Text, 'CHRG');
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1254,6 +1261,7 @@ begin
         
         try
                 resultURL := htCashbillService.getPaymentURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
@@ -1282,6 +1290,7 @@ begin
 
         try
                 resultURL := htCashbillService.getUseHistoryURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.Text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);

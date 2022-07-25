@@ -30,6 +30,14 @@ object TFormExample: TTFormExample
     AutoSize = False
     Caption = 'ÆËºô¾ÆÀÌµð : '
   end
+  object Label5: TLabel
+    Left = 744
+    Top = 13
+    Width = 81
+    Height = 13
+    AutoSize = False
+    Caption = 'URL : '
+  end
   object GroupBox8: TGroupBox
     Left = 8
     Top = 40
@@ -483,5 +491,13 @@ object TFormExample: TTFormExample
         OnClick = btnDeleteDeptUserClick
       end
     end
+  end
+  object txtURL: TEdit
+    Left = 792
+    Top = 8
+    Width = 305
+    Height = 21
+    ImeName = 'Microsoft IME 2010'
+    TabOrder = 4
   end
 end
