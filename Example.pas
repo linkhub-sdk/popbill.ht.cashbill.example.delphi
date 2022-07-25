@@ -3,7 +3,7 @@
 { 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example
 {
 { - SDK 튜토리얼 : https://docs.popbill.com/htcashbill/tutorial/delphi
-{ - 업데이트 일자 : 2022-04-07
+{ - 업데이트 일자 : 2022-07-25
 { - 연동 기술지원 연락처 : 1600-9854
 { - 연동 기술지원 이메일 : code@linkhubcorp.com
 {
@@ -474,7 +474,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.GetFlatRatePopUpURL(txtCorpNum.Text);
+                resultURL := htCashbillService.GetFlatRatePopUpURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -543,7 +543,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.GetCertificatePopUpURL(txtCorpNum.Text);
+                resultURL := htCashbillService.GetCertificatePopUpURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1253,7 +1253,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := htCashbillService.getPaymentURL(txtCorpNum.Text);
+                resultURL := htCashbillService.getPaymentURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
@@ -1281,7 +1281,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := htCashbillService.getUseHistoryURL(txtCorpNum.Text);
+                resultURL := htCashbillService.getUseHistoryURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
