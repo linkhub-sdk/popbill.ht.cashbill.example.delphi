@@ -1,9 +1,9 @@
 object TFormExample: TTFormExample
   Left = 669
   Top = 246
-  Width = 1121
-  Height = 802
-  Caption = '팝빌 홈택스 현금영수증 연동 API SDK Example'
+  Caption = #54045#48716' '#54856#53469#49828' '#54788#44552#50689#49688#51613' '#50672#46041' API SDK Example'
+  ClientHeight = 763
+  ClientWidth = 1105
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object TFormExample: TTFormExample
     Width = 129
     Height = 13
     AutoSize = False
-    Caption = '팝빌회원 사업자번호 : '
+    Caption = #54045#48716#54924#50896' '#49324#50629#51088#48264#54840' : '
   end
   object Label4: TLabel
     Left = 304
@@ -28,7 +28,7 @@ object TFormExample: TTFormExample
     Width = 81
     Height = 13
     AutoSize = False
-    Caption = '팝빌아이디 : '
+    Caption = #54045#48716#50500#51060#46356' : '
   end
   object Label5: TLabel
     Left = 744
@@ -43,21 +43,21 @@ object TFormExample: TTFormExample
     Top = 40
     Width = 1089
     Height = 185
-    Caption = '팝빌 기본 API'
+    Caption = #54045#48716' '#44592#48376' API'
     TabOrder = 0
     object GroupBox9: TGroupBox
       Left = 16
       Top = 24
       Width = 137
       Height = 121
-      Caption = '회원가입'
+      Caption = #54924#50896#44032#51077
       TabOrder = 0
       object btnJoinMember: TButton
         Left = 8
         Top = 88
         Width = 120
         Height = 25
-        Caption = '회원 가입'
+        Caption = #54924#50896' '#44032#51077
         TabOrder = 0
         OnClick = btnJoinMemberClick
       end
@@ -66,7 +66,7 @@ object TFormExample: TTFormExample
         Top = 24
         Width = 120
         Height = 25
-        Caption = '가입여부확인'
+        Caption = #44032#51077#50668#48512#54869#51064
         TabOrder = 1
         OnClick = btnCheckIsMemberClick
       end
@@ -75,7 +75,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 121
         Height = 25
-        Caption = '아이디 중복 확인'
+        Caption = #50500#51060#46356' '#51473#48373' '#54869#51064
         TabOrder = 2
         OnClick = btnCheckIDClick
       end
@@ -85,14 +85,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 145
       Height = 121
-      Caption = '포인트 관련'
+      Caption = #54252#51064#53944' '#44288#47144
       TabOrder = 1
       object btnGetChargeInfo: TButton
         Left = 8
         Top = 24
         Width = 129
         Height = 25
-        Caption = '과금정보 확인'
+        Caption = #44284#44552#51221#48372' '#54869#51064
         TabOrder = 0
         OnClick = btnGetChargeInfoClick
       end
@@ -102,14 +102,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 145
       Height = 153
-      Caption = '담당자 관련'
+      Caption = #45812#45817#51088' '#44288#47144
       TabOrder = 2
       object btnUpdateContact: TButton
         Left = 8
         Top = 120
         Width = 129
         Height = 25
-        Caption = '담당자 정보 수정'
+        Caption = #45812#45817#51088' '#51221#48372' '#49688#51221
         TabOrder = 0
         OnClick = btnUpdateContactClick
       end
@@ -118,7 +118,7 @@ object TFormExample: TTFormExample
         Top = 24
         Width = 129
         Height = 25
-        Caption = '담당자 추가'
+        Caption = #45812#45817#51088' '#52628#44032
         TabOrder = 1
         OnClick = btnRegistContactClick
       end
@@ -127,7 +127,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 129
         Height = 25
-        Caption = '담당자 목록 조회'
+        Caption = #45812#45817#51088' '#47785#47197' '#51312#54924
         TabOrder = 2
         OnClick = btnListContactClick
       end
@@ -136,7 +136,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 129
         Height = 25
-        Caption = '담당자 정보 확인'
+        Caption = #45812#45817#51088' '#51221#48372' '#54869#51064
         TabOrder = 3
         OnClick = btnGetContactInfoClick
       end
@@ -146,14 +146,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 145
       Height = 121
-      Caption = '회사정보 관련'
+      Caption = #54924#49324#51221#48372' '#44288#47144
       TabOrder = 3
       object btnGetCorpInfo: TButton
         Left = 8
         Top = 24
         Width = 128
         Height = 25
-        Caption = '회사정보 조회'
+        Caption = #54924#49324#51221#48372' '#51312#54924
         TabOrder = 0
         OnClick = btnGetCorpInfoClick
       end
@@ -162,7 +162,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 128
         Height = 25
-        Caption = '회사정보 수정'
+        Caption = #54924#49324#51221#48372' '#49688#51221
         TabOrder = 1
         OnClick = btnUpdateCorpInfoClick
       end
@@ -172,14 +172,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 153
       Height = 121
-      Caption = '기타'
+      Caption = #44592#53440
       TabOrder = 4
       object btnGetAccessURL: TButton
         Left = 8
         Top = 24
         Width = 129
         Height = 25
-        Caption = '팝빌 로그인 URL'
+        Caption = #54045#48716' '#47196#44536#51064' URL'
         TabOrder = 0
         OnClick = btnGetAccessURLClick
       end
@@ -189,14 +189,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 148
       Height = 153
-      Caption = '연동과금 포인트'
+      Caption = #50672#46041#44284#44552' '#54252#51064#53944
       TabOrder = 5
       object btnGetBalance: TButton
         Left = 8
         Top = 24
         Width = 129
         Height = 25
-        Caption = '잔여포인트 확인'
+        Caption = #51092#50668#54252#51064#53944' '#54869#51064
         TabOrder = 0
         OnClick = btnGetBalanceClick
       end
@@ -205,7 +205,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 129
         Height = 25
-        Caption = '포인트충전 URL'
+        Caption = #54252#51064#53944#52649#51204' URL'
         TabOrder = 1
         OnClick = btnGetChargeURLClick
       end
@@ -214,7 +214,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 129
         Height = 25
-        Caption = '포인트 결제내역 URL'
+        Caption = #54252#51064#53944' '#44208#51228#45236#50669' URL'
         TabOrder = 2
         OnClick = btnGetPaymentURLClick
       end
@@ -223,7 +223,7 @@ object TFormExample: TTFormExample
         Top = 120
         Width = 129
         Height = 25
-        Caption = '포인트 사용내역 URL'
+        Caption = #54252#51064#53944' '#49324#50857#45236#50669' URL'
         TabOrder = 3
         OnClick = btnGetUseHistoryURLClick
       end
@@ -233,14 +233,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 145
       Height = 121
-      Caption = '파트너과금 포인트'
+      Caption = #54028#53944#45320#44284#44552' '#54252#51064#53944
       TabOrder = 6
       object btnGetPartnerBalance: TButton
         Left = 8
         Top = 24
         Width = 129
         Height = 25
-        Caption = '파트너포인트 확인'
+        Caption = #54028#53944#45320#54252#51064#53944' '#54869#51064
         TabOrder = 0
         OnClick = btnGetPartnerBalanceClick
       end
@@ -249,7 +249,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 129
         Height = 25
-        Caption = '포인트충전 URL'
+        Caption = #54252#51064#53944#52649#51204' URL'
         TabOrder = 1
         OnClick = btnGetPartnerURL_CHRGClick
       end
@@ -278,7 +278,7 @@ object TFormExample: TTFormExample
     Top = 224
     Width = 1089
     Height = 529
-    Caption = '홈택스 현금영수증 연계 관련 API'
+    Caption = #54856#53469#49828' '#54788#44552#50689#49688#51613' '#50672#44228' '#44288#47144' API'
     TabOrder = 3
     object Label1: TLabel
       Left = 24
@@ -286,7 +286,7 @@ object TFormExample: TTFormExample
       Width = 106
       Height = 13
       AutoSize = False
-      Caption = '작업아이디 (jobID) :'
+      Caption = #51089#50629#50500#51060#46356' (jobID) :'
     end
     object Label2: TLabel
       Left = 24
@@ -294,21 +294,21 @@ object TFormExample: TTFormExample
       Width = 263
       Height = 13
       AutoSize = False
-      Caption = '(작업아이디는 '#39'수집 요청'#39' 호출시 생성됩니다.)'
+      Caption = '('#51089#50629#50500#51060#46356#45716' '#39#49688#51665' '#50836#52397#39' '#54840#52636#49884' '#49373#49457#46121#45768#45796'.)'
     end
     object GroupBox3: TGroupBox
       Left = 16
       Top = 24
       Width = 149
       Height = 161
-      Caption = '매출/매입 내역 수집'
+      Caption = #47588#52636'/'#47588#51077' '#45236#50669' '#49688#51665
       TabOrder = 0
       object btnRequestJob: TButton
         Left = 8
         Top = 24
         Width = 130
         Height = 25
-        Caption = '수집 요청'
+        Caption = #49688#51665' '#50836#52397
         TabOrder = 0
         OnClick = btnRequestJobClick
       end
@@ -317,7 +317,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 131
         Height = 25
-        Caption = '수집 상태 확인'
+        Caption = #49688#51665' '#49345#53468' '#54869#51064
         TabOrder = 1
         OnClick = btnGetJobStateClick
       end
@@ -326,7 +326,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 131
         Height = 25
-        Caption = '수집 상태 목록 확인'
+        Caption = #49688#51665' '#49345#53468' '#47785#47197' '#54869#51064
         TabOrder = 2
         OnClick = btnListActiveJobClick
       end
@@ -344,14 +344,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 179
       Height = 161
-      Caption = '매출/매입 수집결과 조회'
+      Caption = #47588#52636'/'#47588#51077' '#49688#51665#44208#44284' '#51312#54924
       TabOrder = 2
       object btnSearch: TButton
         Left = 8
         Top = 24
         Width = 161
         Height = 25
-        Caption = '수집 결과 조회'
+        Caption = #49688#51665' '#44208#44284' '#51312#54924
         TabOrder = 0
         OnClick = btnSearchClick
       end
@@ -360,7 +360,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 161
         Height = 25
-        Caption = '수집 결과 요약정보 조회'
+        Caption = #49688#51665' '#44208#44284' '#50836#50557#51221#48372' '#51312#54924
         TabOrder = 1
         OnClick = btnSummaryClick
       end
@@ -370,14 +370,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 177
       Height = 161
-      Caption = '부가기능'
+      Caption = #48512#44032#44592#45733
       TabOrder = 3
       object btnGetFlatRatePopUpURL: TButton
         Left = 8
         Top = 24
         Width = 161
         Height = 25
-        Caption = '정액제 서비스 신청 URL'
+        Caption = #51221#50529#51228' '#49436#48708#49828' '#49888#52397' URL'
         TabOrder = 0
         OnClick = btnGetFlatRatePopUpURLClick
       end
@@ -386,7 +386,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 161
         Height = 25
-        Caption = '정액제 서비스 상태 확인'
+        Caption = #51221#50529#51228' '#49436#48708#49828' '#49345#53468' '#54869#51064
         TabOrder = 1
         OnClick = btnGetFlatRateStateClick
       end
@@ -425,14 +425,14 @@ object TFormExample: TTFormExample
       Top = 24
       Width = 377
       Height = 161
-      Caption = '홈택스 인증관련 기능'
+      Caption = #54856#53469#49828' '#51064#51613#44288#47144' '#44592#45733
       TabOrder = 5
       object btnGetCertificatePopUpURL: TButton
         Left = 8
         Top = 24
         Width = 177
         Height = 25
-        Caption = '홈택스 인증관리 URL'
+        Caption = #54856#53469#49828' '#51064#51613#44288#47532' URL'
         TabOrder = 0
         OnClick = btnGetCertificatePopUpURLClick
       end
@@ -441,7 +441,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 177
         Height = 25
-        Caption = '공동인증서 만료일자 확인'
+        Caption = #44277#46041#51064#51613#49436' '#47564#47308#51068#51088' '#54869#51064
         TabOrder = 1
         OnClick = btnGetCertificateExpireDateClick
       end
@@ -450,7 +450,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 177
         Height = 25
-        Caption = '공동인증서 로그인 테스트'
+        Caption = #44277#46041#51064#51613#49436' '#47196#44536#51064' '#53580#49828#53944
         TabOrder = 2
         OnClick = btnCheckCertValidationClick
       end
@@ -459,7 +459,7 @@ object TFormExample: TTFormExample
         Top = 120
         Width = 177
         Height = 25
-        Caption = '부서사용자 계정등록'
+        Caption = #48512#49436#49324#50857#51088' '#44228#51221#46321#47197
         TabOrder = 3
         OnClick = btnRegistDeptUserClick
       end
@@ -468,7 +468,7 @@ object TFormExample: TTFormExample
         Top = 24
         Width = 177
         Height = 25
-        Caption = '부서사용자 등록정보 확인'
+        Caption = #48512#49436#49324#50857#51088' '#46321#47197#51221#48372' '#54869#51064
         TabOrder = 4
         OnClick = btnCheckDeptUserClick
       end
@@ -477,7 +477,7 @@ object TFormExample: TTFormExample
         Top = 56
         Width = 177
         Height = 25
-        Caption = '부서사용자 로그인 테스트'
+        Caption = #48512#49436#49324#50857#51088' '#47196#44536#51064' '#53580#49828#53944
         TabOrder = 5
         OnClick = btnCheckLoginDeptUserClick
       end
@@ -486,7 +486,7 @@ object TFormExample: TTFormExample
         Top = 88
         Width = 177
         Height = 25
-        Caption = '부서사용자 등록정보 삭제'
+        Caption = #48512#49436#49324#50857#51088' '#46321#47197#51221#48372' '#49325#51228
         TabOrder = 6
         OnClick = btnDeleteDeptUserClick
       end

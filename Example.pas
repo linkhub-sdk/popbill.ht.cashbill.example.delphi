@@ -1,23 +1,26 @@
 {******************************************************************************}
 {
-{ 팝빌 홈택스 현금영수증 연계  API Delphi SDK Example
+{ 팝빌 홈택스 현금영수증 API Delphi SDK Example
+{ Delphi 연동 튜토리얼 안내 : https://developers.popbill.com/guide/htcashbill/delphi/getting-started/tutorial
 {
-{ - SDK 튜토리얼 : https://developers.popbill.com/guide/htcashbill/delphi/getting-started/tutorial
-{ - 업데이트 일자 : 2022-07-25
-{ - 연동 기술지원 연락처 : 1600-9854
-{ - 연동 기술지원 이메일 : code@linkhubcorp.com
+{ 업데이트 일자 : 2024-02-27
+{ 연동기술지원 연락처 : 1600-9854
+{ 연동기술지원 이메일 : code@linkhubcorp.com
 {
 { <테스트 연동개발 준비사항>
-{ (1) 40, 43번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
-{    링크허브 가입시 메일로 발급받은 인증정보로 수정
-{ (2) 홈택스 연동서비스를 이용하기 위해 팝빌에 인증정보를 등록합니다
-{     인증방법은 부서사용자 인증 공동인증서 인증 방식이 있습니다.
-{     - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴에서
-{       [홈택스 부서사용자 등록] 혹은 [홈택스 공동인증서 등록]을 통해
-{       인증정보를 등록합니다.
-{     - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL)반환된 URL에
-{       접속하여 [홈택스 부서사용자 등록] 혹은 [홈택스 공동인증서 등록]을
-{       통해 인증정보를 등록합니다.
+{ 1) API Key 변경 (연동신청 시 메일로 전달된 정보)
+{    - LinkID : 링크허브에서 발급한 링크아이디
+{    - SecretKey : 링크허브에서 발급한 비밀키
+{ 2) SDK 환경설정 옵션 설정
+{    - IsTest : 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
+{    - IsThrowException : 예외 처리 설정, true-사용, false-미사용, (기본값:true)
+{    - IPRestrictOnOff : 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
+{    - UseLocalTimeYN : 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
+{ 3) 홈택스 로그인 인증정보를 등록합니다. (부서사용자등록 / 공동인증서 등록)
+{    - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴
+{    - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL API) 반환된 URL을 이용하여
+{      홈택스 인증 처리를 합니다.
+{
 {******************************************************************************}
 
 unit Example;
@@ -30,16 +33,11 @@ Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Popbill, PopbillHTCashbill, ExtCtrls, Grids;
 
 const
-        {**********************************************************************}
-        { - 인증정보(링크아이디, 비밀키)는 파트너의 연동회원을 식별하는        }
-        {   인증에 사용되므로 유출되지 않도록 주의하시기 바랍니다              }
-        { - 상업용 전환이후에도 인증정보는 변경되지 않습니다.                  }
-        {**********************************************************************}
 
-        //링크아이디.
+        // 링크아이디
         LinkID = 'TESTER';
 
-        // 파트너 통신용 비밀키. 유출 주의.
+        // 비밀키
         SecretKey = 'SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I=';
 
 type
@@ -145,18 +143,19 @@ implementation
 
 procedure TTFormExample.FormCreate(Sender: TObject);
 begin
+        // 홈택스 현금영수증 모듈 초기화
         htCashbillService := THometaxCBService.Create(LinkID,SecretKey);
 
-        // 연동환경 설정, true-개발용, false-상업용
+        // 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
         htCashbillService.IsTest := true;
 
-        // Exception 처리 설정, true-사용, false-미사용, 기본값(true)
+        // 예외 처리 설정, true-사용, false-미사용, (기본값:true)
         htCashbillService.IsThrowException := true;
 
-        // 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
+        // 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
         htCashbillService.IPRestrictOnOff := true;
 
-        //로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+        // 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
         htCashbillService.UseLocalTimeYN := false;
 
         StringGrid1.Cells[0,0] := 'ntsconfirmNum';
